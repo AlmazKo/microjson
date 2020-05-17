@@ -2,7 +2,7 @@
 
 JSON tiny library written in modern Java.
 
-![Java CI with Gradle](https://github.com/AlmazKo/microjson/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=ci-init)
+![Build](https://github.com/AlmazKo/microjson/workflows/Build/badge.svg)
 [![codecov](https://codecov.io/gh/AlmazKo/microjson/branch/master/graph/badge.svg)](https://codecov.io/gh/AlmazKo/microjson)
 
 ### Pros:
@@ -21,9 +21,9 @@ JSON tiny library written in modern Java.
 ## Example:
 
 ```java
-var user = JsonParser.parseObject(Files.readString(Path.of("my.json"));
-String name = user.getString("name");
-int age = user.getNumber("age").intValue();
-JsArray tags = user.getArray("tags");
-String tag = tags.getString(0);
+var content = Files.readString(Path.of("my.json")
+var user = Json.parseObject(content);
+var name = user.getString("name");
+var age = user.getNumber("age").intValue();
+var tag = user.getArray("tags").getString(0);
 ```

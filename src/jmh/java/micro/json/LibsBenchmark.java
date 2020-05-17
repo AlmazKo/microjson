@@ -35,7 +35,7 @@ public class LibsBenchmark {
 
     @Benchmark
     public Object smallMicro() {
-        return JsonParser.parse(exampleSmall);
+        return Json.parse(exampleSmall);
     }
 
     @Benchmark
@@ -51,7 +51,7 @@ public class LibsBenchmark {
 
     @Benchmark
     public Object emptyObjectMicro() {
-        return JsonParser.parse("{ }");
+        return Json.parse("{ }");
     }
 
     @Benchmark
@@ -67,7 +67,7 @@ public class LibsBenchmark {
 
     @Benchmark
     public Object tweetMicro() {
-        return JsonParser.parse(exampleTweet);
+        return Json.parse(exampleTweet);
     }
 
     @Benchmark

@@ -3,6 +3,8 @@ package micro.json;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -17,7 +19,7 @@ class JsonTest {
     @Test
     void parseObject() throws IOException {
         String example = Files.readString(Path.of("src/test/resources/test.json"));
-        var js = JsonParser.parseObject(example);
+        var js = Json.parseObject(example);
 
         assertEquals("Hello ", js.getString("str"));
         assertEquals(" ", js.getString("str_blank"));
@@ -29,6 +31,8 @@ class JsonTest {
         assertEquals(1e-12, js.getNumber("number"));
         assertEquals(1, js.getNumber("number1"));
         assertEquals(123456789012345L, js.getNumber("number_long"));
+        assertEquals(new BigInteger("1234567890123456789012345678901234567890"), js.getNumber("big_integer"));
+        assertEquals(new BigDecimal("0.1234567890123456789012345678901234567890"), js.getNumber("big_decimal"));
         assertEquals(true, js.getBoolean("bool_true"));
         assertEquals(false, js.getBoolean("bool_false"));
         assertNull(js.getNumber("nullable"));
@@ -50,11 +54,11 @@ class JsonTest {
 
     @Test
     void parseArray() {
-        assertTrue(JsonParser.parse("[1]") instanceof JsArray);
-        assertTrue(JsonParser.parse("{}") instanceof JsObject);
-        assertTrue(JsonParser.parse("1") instanceof Number);
-        assertTrue(JsonParser.parse("true") instanceof Boolean);
-        assertTrue(JsonParser.parse("false") instanceof Boolean);
-        assertNull(JsonParser.parse("null"));
+        assertTrue(Json.parse("[1]") instanceof JsArray);
+        assertTrue(Json.parse("{}") instanceof JsObject);
+        assertTrue(Json.parse("1") instanceof Number);
+        assertTrue(Json.parse("true") instanceof Boolean);
+        assertTrue(Json.parse("false") instanceof Boolean);
+        assertNull(Json.parse("null"));
     }
 }

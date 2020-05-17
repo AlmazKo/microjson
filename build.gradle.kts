@@ -52,15 +52,13 @@ tasks.jacocoTestReport {
 
 dependencies {
     compileOnly("org.jetbrains:annotations:19.0.0")
+
     "jmhImplementation"(project)
     "jmhImplementation"("com.fasterxml.jackson.core:jackson-databind:2.11.0")
     "jmhImplementation"("com.google.code.gson:gson:2.8.6")
     "jmhImplementation"("org.openjdk.jmh:jmh-core:1.23")
     "jmhAnnotationProcessor"("org.openjdk.jmh:jmh-generator-annprocess:1.23")
-}
 
-
-dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }

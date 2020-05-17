@@ -4,14 +4,17 @@ import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-public final class JsonParser {
+public final class Json {
     private final String src;
     private       int    cursor;
 
-    JsonParser(String cs) {
+    private Json(String cs) {
         this.src = cs;
     }
 
@@ -65,12 +68,18 @@ public final class JsonParser {
             if (isWhitespace(c) || c == ',' || c == '}' || c == ']') break;
         }
 
-        if (isInt && cursor - beginIdx < 10) {
+        int len = cursor - beginIdx;
+
+        if (isInt && len < 10) {
             return Integer.parseInt(src, beginIdx, cursor--, 10);
-        } else if (isInt) {
+        } else if (isInt && len < 19) {
             return Long.parseLong(src, beginIdx, cursor--, 10);
-        } else {
+        } else if (isInt) {
+            return new BigInteger(src.substring(beginIdx, cursor--));
+        } else if (len < 15) {
             return Double.parseDouble(src.substring(beginIdx, cursor--));
+        } else {
+            return new BigDecimal(src.substring(beginIdx, cursor--));
         }
     }
 
@@ -112,7 +121,7 @@ public final class JsonParser {
     }
 
     public static @Nullable Object parse(@Language("JSON") String s) throws IllegalArgumentException {
-        return new JsonParser(s).parseValue();
+        return new Json(s).parseValue();
     }
 
     public static JsObject parseObject(@Language("JSON") String s) throws IllegalArgumentException {
