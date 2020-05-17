@@ -1,0 +1,107 @@
+{
+  "data": {
+    "attachments": {
+      "media_keys": [
+        "7_1138489597158199298"
+      ]
+    },
+    "author_id": "2244994945",
+    "context_annotations": [
+      {
+        "domain": {
+          "id": "45",
+          "name": "Brand Vertical",
+          "description": "Top level entities that describe a Brands industry"
+        },
+        "entity": {
+          "id": "781974596165640193",
+          "name": "Technology"
+        }
+      },
+      {
+        "domain": {
+          "id": "46",
+          "name": "Brand Category",
+          "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+        },
+        "entity": {
+          "id": "781974596752842752",
+          "name": "Services"
+        }
+      },
+      {
+        "domain": {
+          "id": "47",
+          "name": "Brand",
+          "description": "Brands and Companies"
+        },
+        "entity": {
+          "id": "10045225402",
+          "name": "Twitter"
+        }
+      }
+    ],
+    "created_at": "2019-06-11T17:59:13.000Z",
+    "entities": {
+      "annotations": [
+        {
+          "start": 44,
+          "end": 65,
+          "probability": 0.3687,
+          "type": "Product",
+          "normalized_text": "Twitter Developer Labs"
+        }
+      ],
+      "urls": [
+        {
+          "start": 174,
+          "end": 197,
+          "url": "https://t.co/eNx4Wc3Qwj",
+          "expanded_url": "https://twittercommunity.com/t/twitter-developer-labs-is-open-to-all-developers/126717",
+          "display_url": "twittercommunity.com/t/twitter-deve…",
+          "images": [
+            {
+              "url": "https://pbs.twimg.com/news_img/1198608207737806848/EPekNT6H?format=jpg&name=orig",
+              "width": 1200,
+              "height": 630
+            },
+            {
+              "url": "https://pbs.twimg.com/news_img/1198608207737806848/EPekNT6H?format=jpg&name=150x150",
+              "width": 150,
+              "height": 150
+            }
+          ],
+          "status": 200,
+          "title": "Twitter Developer Labs is open to all developers",
+          "description": "Following our initial announcement, we’re excited to share that Twitter Developer Labs is now available to all developers! Twitter Developer Labs is a new program to let developers test new API endpoints and share feedback as we build the new generation of the Twitter API. Since the endpoints we will release in Labs are early previews, they may change before we release them broadly. We encourage you to take that into consideration as you build with them. For example, this might mean they’re not...",
+          "unwound_url": "https://twittercommunity.com/t/twitter-developer-labs-is-open-to-all-developers/126717"
+        },
+        {
+          "start": 198,
+          "end": 221,
+          "url": "https://t.co/ucmZrJAYjk",
+          "expanded_url": "https://twitter.com/TwitterDev/status/1138505981460193280/video/1",
+          "display_url": "pic.twitter.com/ucmZrJAYjk"
+        }
+      ]
+    },
+    "id": "1138505981460193280",
+    "lang": "en",
+    "public_metrics": {
+      "retweet_count": 107,
+      "reply_count": 31,
+      "like_count": 258,
+      "quote_count": 36
+    },
+    "source": "Twitter Web Client",
+    "text": "🎺 da-dada-DAH! We’re introducing the first Twitter Developer Labs endpoints: \n\n✨GET/users and GET/tweets ✨\n\nLabs is now open to all developers to start experimenting today 👉 https://t.co/eNx4Wc3Qwj https://t.co/ucmZrJAYjk"
+  },
+  "includes": {
+    "media": [
+      {
+        "media_key": "7_1138489597158199298",
+        "type": "video"
+      }
+    ]
+  }
+}

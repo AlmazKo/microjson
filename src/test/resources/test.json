@@ -1,0 +1,21 @@
+{
+  "str": "Hello ",
+  "str_empty": "",
+
+  "str_blank": " ",
+  "str_utf": "Солнце ☀",
+  "str_utf_escaped": "Hot \u2615",
+  "number1": 1,
+  "number": 1e-12,
+  "number_long": 123456789012345,
+  "nullable": null,
+  "bool_true": true,
+  "bool_false": false,
+  "negative_number": -12345,
+  "nested_array": [[]],
+  "obj_empty": {},
+  "arr_full": ["array", {"value": 1}, [], true, false, null, 0.5],
+  "obj": {
+    "name": "Value"
+  }
+}
