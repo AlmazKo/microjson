@@ -2,6 +2,8 @@
 
 JSON tiny library written in modern Java.
 
+![Java CI with Gradle](https://github.com/AlmazKo/microjson/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=ci-init)
+
 ### Pros:
 - Tiny library(3 small classes only!), ~5KB in a jar
 - Fast JSON parsing, it faster than Jackson more than 25%

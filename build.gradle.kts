@@ -1,5 +1,6 @@
 plugins {
     java
+    jacoco
 }
 
 group = "micro"
@@ -35,6 +36,16 @@ tasks {
         classpath = sourceSets["jmh"].runtimeClasspath
         args("-wi", "1", "-wf", "1", "-i", "1", "-f", "1")
         jvmArgs("--enable-preview")
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.isEnabled = true
+        csv.isEnabled = false
+        html.isEnabled = false
+        xml.destination = file("${buildDir}/reports/jacoco/report.xml")
     }
 }
 
