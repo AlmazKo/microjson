@@ -1,15 +1,17 @@
 (Less is better)
 
-
 Benchmark                         Mode  Cnt      Score   Error  Units
-LibsBenchmark.emptyObjectGson     avgt         250.120          ns/op
-LibsBenchmark.emptyObjectJackson  avgt          89.935          ns/op
-LibsBenchmark.emptyObjectMicro    avgt           2.470          ns/op
+LibsBenchmark.emptyObjectMicro    avgt           2.403          ns/op
+LibsBenchmark.emptyObjectDslJson  avgt          23.398          ns/op
+LibsBenchmark.emptyObjectJackson  avgt          85.193          ns/op
+LibsBenchmark.emptyObjectGson     avgt         257.444          ns/op
 
-LibsBenchmark.smallGson           avgt         418.554          ns/op
-LibsBenchmark.smallJackson        avgt         243.177          ns/op
-LibsBenchmark.smallMicro          avgt         149.005          ns/op
+LibsBenchmark.smallMicro          avgt         138.760          ns/op
+LibsBenchmark.smallDslJson        avgt         163.347          ns/op
+LibsBenchmark.smallJackson        avgt         245.047          ns/op
+LibsBenchmark.smallGson           avgt         409.871          ns/op
 
-LibsBenchmark.tweetGson           avgt       11598.634          ns/op
-LibsBenchmark.tweetJackson        avgt        8828.101          ns/op
-LibsBenchmark.tweetMicro          avgt        6373.732          ns/op
+LibsBenchmark.tweetMicro          avgt        7237.092          ns/op
+LibsBenchmark.tweetJackson        avgt        8471.251          ns/op
+LibsBenchmark.tweetDslJson        avgt       10737.822          ns/op
+LibsBenchmark.tweetGson           avgt       11609.525          ns/op

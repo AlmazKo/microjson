@@ -55,6 +55,7 @@ dependencies {
 
     "jmhImplementation"(project)
     "jmhImplementation"("com.fasterxml.jackson.core:jackson-databind:2.11.0")
+    "jmhImplementation"("com.dslplatform:dsl-json-java8:1.9.5")
     "jmhImplementation"("com.google.code.gson:gson:2.8.6")
     "jmhImplementation"("org.openjdk.jmh:jmh-core:1.23")
     "jmhAnnotationProcessor"("org.openjdk.jmh:jmh-generator-annprocess:1.23")

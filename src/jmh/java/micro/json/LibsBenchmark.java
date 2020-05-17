@@ -1,9 +1,9 @@
 package micro.json;
 
+import com.dslplatform.json.DslJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -12,26 +12,38 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode({Mode.AverageTime})
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 public class LibsBenchmark {
 
-    private static final String       exampleSmall;
-    private static final String       exampleTweet;
-    private static final String       exampleNumbers;
-    private static final ObjectMapper jacksonMapper = new ObjectMapper();
+    private static final String          exampleEmpty      = "{ }";
+    private static final byte[]          exampleEmptyBytes = "{ }".getBytes();
+    private static final String          exampleSmall;
+    private static final byte[]          exampleSmallBytes;
+    private static final String          exampleTweet;
+    private static final byte[]          exampleTweetBytes;
+    private static final String          exampleNumbers;
+    private static final ObjectMapper    jacksonMapper     = new ObjectMapper();
+    private static final DslJson<Object> dslJson           = new DslJson<>();
 
     static {
         try {
             exampleSmall = Files.readString(Path.of("src/jmh/resources/small.json"));
+            exampleSmallBytes = exampleSmall.getBytes();
             exampleTweet = Files.readString(Path.of("src/jmh/resources/tweet.json"));
+            exampleTweetBytes = exampleTweet.getBytes();
             exampleNumbers = Files.readString(Path.of("src/jmh/resources/numbers.json"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
+
+    //---- parse small json
 
     @Benchmark
     public Object smallMicro() {
@@ -39,31 +51,47 @@ public class LibsBenchmark {
     }
 
     @Benchmark
-    public JsonNode smallJackson() throws JsonProcessingException {
+    public Object smallJackson() throws JsonProcessingException {
         return jacksonMapper.readTree(exampleSmall);
     }
 
     @Benchmark
-    public JsonElement smallGson() {
-        return com.google.gson.JsonParser.parseString(exampleSmall);
+    public Object smallGson() throws JsonProcessingException {
+        return JsonParser.parseString(exampleSmall);
     }
 
+    @Benchmark
+    public Object smallDslJson() throws IOException {
+        return dslJson.deserialize(Map.class, exampleSmallBytes, exampleSmallBytes.length);
+    }
+
+
+
+    //---- parse empty object
+
+    @Benchmark
+    public Object emptyObjectGson() {
+        return JsonParser.parseString(exampleEmpty);
+    }
 
     @Benchmark
     public Object emptyObjectMicro() {
-        return Json.parse("{ }");
+        return Json.parseObject(exampleEmpty);
     }
 
     @Benchmark
-    public JsonNode emptyObjectJackson() throws JsonProcessingException {
-        return jacksonMapper.readTree("{ }");
+    public Object emptyObjectJackson() throws JsonProcessingException {
+        return jacksonMapper.readTree(exampleEmpty);
     }
 
     @Benchmark
-    public JsonElement emptyObjectGson() {
-        return com.google.gson.JsonParser.parseString("{ }");
+    public Object emptyObjectDslJson() throws IOException {
+        return dslJson.deserialize(Map.class, exampleEmptyBytes, exampleEmptyBytes.length);
     }
 
+
+
+    //---- parse common tweet
 
     @Benchmark
     public Object tweetMicro() {
@@ -71,12 +99,18 @@ public class LibsBenchmark {
     }
 
     @Benchmark
-    public JsonNode tweetJackson() throws JsonProcessingException {
+    public Object tweetJackson() throws JsonProcessingException {
         return jacksonMapper.readTree(exampleTweet);
     }
 
     @Benchmark
-    public JsonElement tweetGson() {
-        return com.google.gson.JsonParser.parseString(exampleTweet);
+    public Object tweetGson() {
+        return JsonParser.parseString(exampleTweet);
     }
+
+    @Benchmark
+    public Object tweetDslJson() throws IOException {
+        return dslJson.deserialize(Map.class, exampleTweetBytes, exampleTweetBytes.length);
+    }
+
 }
