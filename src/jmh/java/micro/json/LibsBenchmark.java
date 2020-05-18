@@ -12,11 +12,12 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode({Mode.AverageTime})
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class LibsBenchmark {
 
     private static final String          exampleEmpty      = "{ }";
@@ -26,6 +27,7 @@ public class LibsBenchmark {
     private static final String          exampleTweet;
     private static final byte[]          exampleTweetBytes;
     private static final String          exampleNumbers;
+    private static final byte[]          exampleNumbersBytes;
     private static final ObjectMapper    jacksonMapper     = new ObjectMapper();
     private static final DslJson<Object> dslJson           = new DslJson<>();
 
@@ -36,6 +38,7 @@ public class LibsBenchmark {
             exampleTweet = Files.readString(Path.of("src/jmh/resources/tweet.json"));
             exampleTweetBytes = exampleTweet.getBytes();
             exampleNumbers = Files.readString(Path.of("src/jmh/resources/numbers.json"));
+            exampleNumbersBytes = exampleNumbers.getBytes();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -111,6 +114,30 @@ public class LibsBenchmark {
     @Benchmark
     public Object tweetDslJson() throws IOException {
         return dslJson.deserialize(Map.class, exampleTweetBytes, exampleTweetBytes.length);
+    }
+
+
+
+    //---- parse a big array of numbers
+
+    @Benchmark
+    public Object numbersMicro() {
+        return Json.parse(exampleNumbers);
+    }
+
+    @Benchmark
+    public Object numbersJackson() throws JsonProcessingException {
+        return jacksonMapper.readTree(exampleNumbers);
+    }
+
+        @Benchmark
+    public Object numbersGson() {
+        return JsonParser.parseString(exampleNumbers);
+    }
+
+    @Benchmark
+    public Object numbersDslJson() throws IOException {
+        return dslJson.deserialize(List.class, exampleNumbersBytes, exampleNumbersBytes.length);
     }
 
 }
