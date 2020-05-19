@@ -1,4 +1,4 @@
-package micro.json;
+package almazko.microjson;
 
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;

@@ -3,7 +3,7 @@ plugins {
     jacoco
 }
 
-group = "micro"
+group = "almazko"
 version = "1.0-SNAPSHOT"
 
 repositories {

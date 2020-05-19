@@ -1,4 +1,4 @@
-package micro.json;
+package almazko.microjson;
 
 import org.junit.jupiter.api.Test;
 

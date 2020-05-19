@@ -1,4 +1,4 @@
-package micro.json;
+package almazko.microjson;
 
 import com.dslplatform.json.DslJson;
 import com.fasterxml.jackson.core.JsonProcessingException;

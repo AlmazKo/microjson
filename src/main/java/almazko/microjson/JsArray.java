@@ -1,8 +1,7 @@
-package micro.json;
+package almazko.microjson;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public final class JsArray {

@@ -1,5 +1,5 @@
 module microjson {
     requires org.jetbrains.annotations;
 
-    exports micro.json;
+    exports almazko.microjson;
 }
