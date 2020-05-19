@@ -1,9 +1,5 @@
 package almazko.microjson;
 
-import org.intellij.lang.annotations.Language;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -50,7 +46,7 @@ public final class Json {
         }
     }
 
-    private @NotNull String parseString() {
+    private String parseString() {
         cursor++;
         int endIdx = src.indexOf('"', cursor);
         String value = src.substring(cursor, endIdx);
@@ -58,7 +54,7 @@ public final class Json {
         return value;
     }
 
-    private @NotNull Number parseNumber() throws NumberFormatException {
+    private Number parseNumber() throws NumberFormatException {
         boolean isInt = true;
         final int beginIdx = cursor;
 
@@ -83,7 +79,7 @@ public final class Json {
         }
     }
 
-    private @NotNull JsObject parseObject() {
+    private JsObject parseObject() {
         JsObject obj = null;
         String key = null;
 
@@ -101,7 +97,11 @@ public final class Json {
         }
     }
 
-    private @NotNull JsArray parseArray() {
+
+    /**
+     * @return Array
+     */
+    private JsArray parseArray() {
         JsArray array = null;
         for (cursor++; ; cursor++) {
             char c = src.charAt(cursor);
@@ -120,11 +120,19 @@ public final class Json {
         return c == ' ' || c == '\r' || c == '\n' || c == '\t';
     }
 
-    public static @Nullable Object parse(@Language("JSON") String s) throws IllegalArgumentException {
-        return new Json(s).parseValue();
+    /**
+     * @param jsonContent JSON
+     * @return JSON element, including {@code null} when "null" is passed
+     */
+    public static Object parse(String jsonContent) throws IllegalArgumentException {
+        return new Json(jsonContent).parseValue();
     }
 
-    public static JsObject parseObject(@Language("JSON") String s) throws IllegalArgumentException {
-        return (JsObject) parse(s);
+    /**
+     * @param jsonContent JSON
+     * @return JSON object
+     */
+    public static JsObject parseObject(String jsonContent) throws IllegalArgumentException {
+        return (JsObject) parse(jsonContent);
     }
 }

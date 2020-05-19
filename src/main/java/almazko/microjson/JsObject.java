@@ -1,7 +1,5 @@
 package almazko.microjson;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,23 +16,43 @@ public final class JsObject {
         this.values = new HashMap<>();
     }
 
-    @Nullable public JsArray getArray(String key) {
+    /**
+     * @param key JSON field
+     * @return Array or {@code null}
+     */
+    public JsArray getArray(String key) {
         return (JsArray) values.get(key);
     }
 
-    @Nullable public JsObject getObject(String key) {
+    /**
+     * @param key JSON field
+     * @return JsObject or {@code null}
+     */
+    public JsObject getObject(String key) {
         return (JsObject) values.get(key);
     }
 
-    @Nullable public Number getNumber(String key) {
+    /**
+     * @param key JSON field
+     * @return Number or {@code null}
+     */
+    public Number getNumber(String key) {
         return (Number) values.get(key);
     }
 
-    @Nullable public String getString(String key) {
+    /**
+     * @param key JSON field
+     * @return String or {@code null}
+     */
+    public String getString(String key) {
         return (String) values.get(key);
     }
 
-    @Nullable public Boolean getBoolean(String key) {
+    /**
+     * @param key JSON field
+     * @return Boolean or {@code null}
+     */
+    public Boolean getBoolean(String key) {
         return (Boolean) values.get(key);
     }
 

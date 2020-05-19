@@ -52,8 +52,6 @@ tasks.jacocoTestReport {
 
 
 dependencies {
-    compileOnly("org.jetbrains:annotations:19.0.0")
-
     "jmhImplementation"(project)
     "jmhImplementation"("com.fasterxml.jackson.core:jackson-databind:2.11.0")
     "jmhImplementation"("com.dslplatform:dsl-json-java8:1.9.5")

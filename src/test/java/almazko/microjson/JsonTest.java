@@ -53,6 +53,7 @@ class JsonTest {
     }
 
     @Test
+    //language=JSON
     void parseArray() {
         assertTrue(Json.parse("[1]") instanceof JsArray);
         assertTrue(Json.parse("{}") instanceof JsObject);

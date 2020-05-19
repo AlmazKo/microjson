@@ -8,7 +8,8 @@ JSON tiny library written in modern Java.
 ### Pros:
 - Tiny library(3 small classes only!), ~5KB in a jar
 - Fast JSON parsing, it faster than Jackson more than 25%, [benchmarks](https://github.com/AlmazKo/microjson/blob/master/src/jmh/results.txt)
-- Bundled as java9 module without any JDK dependencies
+- Bundled as Java 9 module without
+- No dependencies, only java.base
 - Support the full JSON specification
 
 ### Cons:
