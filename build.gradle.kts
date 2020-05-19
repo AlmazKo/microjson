@@ -1,6 +1,7 @@
 plugins {
     java
     jacoco
+    `maven-publish`
 }
 
 group = "almazko"
