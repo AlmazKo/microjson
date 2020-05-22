@@ -18,7 +18,7 @@ class JsonTest {
 
     @Test
     void parseObject() throws IOException {
-        String example = Files.readString(Path.of("src/test/resources/test.json"));
+        var example = Files.readString(Path.of("src/test/resources/test.json"));
         var js = Json.parseObject(example);
 
         assertEquals("Hello ", js.getString("str"));
@@ -41,7 +41,7 @@ class JsonTest {
         assertEquals(0, js.getArray("nested_array").getArray(0).size());
         assertEquals(0, js.getObject("obj_empty").size());
 
-        JsArray arr = js.getArray("arr_full");
+        var arr = js.getArray("arr_full");
         assertNotNull(arr);
         assertEquals("array", arr.getString(0));
         assertNotNull(arr.getObject(1));

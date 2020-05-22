@@ -19,22 +19,30 @@ public final class Json {
         skipWhitespaces();
 
         switch (src.charAt(cursor)) {
-            case '[' -> value = parseArray();
-            case '{' -> value = parseObject();
-            case '"' -> value = parseString();
-            case 'n' -> {
+            case '[':
+                value = parseArray();
+                break;
+            case '{':
+                value = parseObject();
+                break;
+            case '"':
+                value = parseString();
+                break;
+            case 'n':
                 cursor += 3;
                 value = null;
-            }
-            case 't' -> {
+                break;
+            case 't':
                 cursor += 3;
                 value = TRUE;
-            }
-            case 'f' -> {
+                break;
+            case 'f':
                 cursor += 4;
                 value = FALSE;
-            }
-            default -> value = parseNumber();
+                break;
+            default:
+                value = parseNumber();
+                break;
         }
 
         return value;
@@ -59,7 +67,7 @@ public final class Json {
         final int beginIdx = cursor;
 
         for (; cursor < src.length(); cursor++) {
-            var c = src.charAt(cursor);
+            char c = src.charAt(cursor);
             if (isInt && c == 'e' || c == 'E' || c == '.') isInt = false;
             if (isWhitespace(c) || c == ',' || c == '}' || c == ']') break;
         }
