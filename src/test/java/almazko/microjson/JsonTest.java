@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JsonTest {
@@ -53,7 +54,7 @@ class JsonTest {
     }
 
     @Test
-    //language=JSON
+        //language=JSON
     void parseArray() {
         assertTrue(Json.parse("[1]") instanceof JsArray);
         assertTrue(Json.parse("{}") instanceof JsObject);
@@ -61,5 +62,20 @@ class JsonTest {
         assertTrue(Json.parse("true") instanceof Boolean);
         assertTrue(Json.parse("false") instanceof Boolean);
         assertNull(Json.parse("null"));
+    }
+
+    @Test
+    void checkSizes() {
+        /*language=JSON */
+        var js = Json.parseObject("{\"id\":1234,\"friends\": []}");
+        assertEquals(js.size(), 2);
+        assertEquals(js.getArray("friends").size(), 0);
+    }
+
+    @Test
+    void checkInvalidJson() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Json.parseObject("{\"id\":1234,\"friends: []}");
+        });
     }
 }

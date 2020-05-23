@@ -133,7 +133,12 @@ public final class Json {
      * @return JSON element, including {@code null} when "null" is passed
      */
     public static Object parse(String jsonContent) throws IllegalArgumentException {
-        return new Json(jsonContent).parseValue();
+        Json parser = new Json(jsonContent);
+        try {
+            return parser.parseValue();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Wrong JSON at position: " + parser.cursor);
+        }
     }
 
     /**
