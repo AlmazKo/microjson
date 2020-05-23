@@ -78,4 +78,10 @@ class JsonTest {
             Json.parseObject("{\"id\":1234,\"friends: []}");
         });
     }
+
+    @Test
+    void parseWindowsEncodedFile() throws IOException {
+        var example = Files.readString(Path.of("src/test/resources/test_win.json"));
+        assertTrue(Json.parse(example) instanceof JsObject);
+    }
 }
