@@ -125,7 +125,11 @@ public final class Json {
     }
 
     private static boolean isWhitespace(char c) {
-        return c == ' ' || c == '\r' || c == '\n' || c == '\t';
+        if (c == ' ') return true;
+        if (c == '\r') return true;
+        if (c == '\n') return true;
+        if (c == '\t') return true;
+        return false;
     }
 
     /**
