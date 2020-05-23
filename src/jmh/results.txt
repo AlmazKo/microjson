@@ -1,21 +1,25 @@
 (Less is better)
 
-Benchmark                         Mode  Cnt      Score   Error  Units
-LibsBenchmark.emptyObjectMicro    avgt         0.002          us/op
-LibsBenchmark.emptyObjectDslJson  avgt         0.023          us/op
-LibsBenchmark.emptyObjectJackson  avgt         0.085          us/op
-LibsBenchmark.emptyObjectGson     avgt         0.251          us/op
+Benchmark                          Mode  Cnt       Score   Error  Units
+LibsBenchmark.emptyObjectMicro     avgt         0.002          us/op
+LibsBenchmark.emptyObjectDslJson   avgt         0.029          us/op
+LibsBenchmark.emptyObjectFastJson  avgt         0.058          us/op
+LibsBenchmark.emptyObjectJackson   avgt         0.088          us/op
+LibsBenchmark.emptyObjectGson      avgt         0.246          us/op
 
-LibsBenchmark.smallMicro          avgt         0.130          us/op
-LibsBenchmark.smallDslJson        avgt         0.150          us/op
-LibsBenchmark.smallJackson        avgt         0.230          us/op
-LibsBenchmark.smallGson           avgt         0.396          us/op
+LibsBenchmark.smallMicro           avgt         0.134          us/op
+LibsBenchmark.smallDslJson         avgt         0.159          us/op
+LibsBenchmark.smallFastJson        avgt         0.220          us/op
+LibsBenchmark.smallJackson         avgt         0.228          us/op
+LibsBenchmark.smallGson            avgt         0.398          us/op
 
-LibsBenchmark.tweetMicro          avgt         6.055          us/op
-LibsBenchmark.tweetJackson        avgt         8.837          us/op
-LibsBenchmark.tweetDslJson        avgt        11.152          us/op
-LibsBenchmark.tweetGson           avgt        12.023          us/op
+LibsBenchmark.tweetMicro           avgt         5.957          us/op
+LibsBenchmark.tweetJackson         avgt         9.016          us/op
+LibsBenchmark.tweetDslJson         avgt        11.014          us/op
+LibsBenchmark.tweetFastJson        avgt        11.152          us/op
+LibsBenchmark.tweetGson            avgt        12.299          us/op
 
-LibsBenchmark.numbersJackson      avgt       141.529          us/op
-LibsBenchmark.numbersMicro        avgt       136.186          us/op
-LibsBenchmark.numbersGson         avgt       175.031          us/op
+LibsBenchmark.numbersMicro         avgt       133.908          us/op
+LibsBenchmark.numbersFastJson      avgt       135.479          us/op
+LibsBenchmark.numbersJackson       avgt       146.280          us/op
+LibsBenchmark.numbersGson          avgt       183.727          us/op

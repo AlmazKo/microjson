@@ -38,6 +38,11 @@ sourceSets.create("jmh") {
     java.setSrcDirs(listOf("src/jmh/java"))
 }
 
+tasks.named<JavaCompile>("compileJmhJava") {
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
+}
+
 tasks {
     register("jmh", type = JavaExec::class) {
         dependsOn("jmhClasses")
@@ -65,6 +70,7 @@ dependencies {
     "jmhImplementation"("com.fasterxml.jackson.core:jackson-databind:2.11.0")
     "jmhImplementation"("com.dslplatform:dsl-json-java8:1.9.5")
     "jmhImplementation"("com.google.code.gson:gson:2.8.6")
+    "jmhImplementation"("com.alibaba:fastjson:1.2.68")
     "jmhImplementation"("org.openjdk.jmh:jmh-core:1.23")
     "jmhAnnotationProcessor"("org.openjdk.jmh:jmh-generator-annprocess:1.23")
 

@@ -1,5 +1,6 @@
 package almazko.microjson;
 
+import com.alibaba.fastjson.JSON;
 import com.dslplatform.json.DslJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,7 +46,6 @@ public class LibsBenchmark {
     }
 
 
-
     //---- parse small json
 
     @Benchmark
@@ -68,6 +68,10 @@ public class LibsBenchmark {
         return dslJson.deserialize(Map.class, exampleSmallBytes, exampleSmallBytes.length);
     }
 
+    @Benchmark
+    public Object smallFastJson() {
+        return JSON.parseObject(exampleSmall);
+    }
 
 
     //---- parse empty object
@@ -92,6 +96,10 @@ public class LibsBenchmark {
         return dslJson.deserialize(Map.class, exampleEmptyBytes, exampleEmptyBytes.length);
     }
 
+    @Benchmark
+    public Object emptyObjectFastJson() {
+        return JSON.parseObject(exampleEmpty);
+    }
 
 
     //---- parse common tweet
@@ -116,6 +124,10 @@ public class LibsBenchmark {
         return dslJson.deserialize(Map.class, exampleTweetBytes, exampleTweetBytes.length);
     }
 
+    @Benchmark
+    public Object tweetFastJson() {
+        return JSON.parseObject(exampleTweet);
+    }
 
 
     //---- parse a big array of numbers
@@ -130,7 +142,7 @@ public class LibsBenchmark {
         return jacksonMapper.readTree(exampleNumbers);
     }
 
-        @Benchmark
+    @Benchmark
     public Object numbersGson() {
         return JsonParser.parseString(exampleNumbers);
     }
@@ -138,6 +150,11 @@ public class LibsBenchmark {
     @Benchmark
     public Object numbersDslJson() throws IOException {
         return dslJson.deserialize(List.class, exampleNumbersBytes, exampleNumbersBytes.length);
+    }
+
+    @Benchmark
+    public Object numbersFastJson() {
+        return JSON.parseArray(exampleNumbers);
     }
 
 }
