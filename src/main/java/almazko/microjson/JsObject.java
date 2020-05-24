@@ -43,6 +43,14 @@ public final class JsObject {
 
     /**
      * @param key JSON field
+     * @return int
+     */
+    public int getInt(String key) throws NullPointerException {
+        return ((Number) values.get(key)).intValue();
+    }
+
+    /**
+     * @param key JSON field
      * @return String or {@code null}
      */
     public String getString(String key) {

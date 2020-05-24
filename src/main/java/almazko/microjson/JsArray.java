@@ -2,9 +2,10 @@ package almazko.microjson;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public final class JsArray {
+public final class JsArray implements Iterable<Object> {
     static final JsArray      EMPTY = new JsArray(Collections.emptyList());
     final        List<Object> values;
 
@@ -36,6 +37,10 @@ public final class JsArray {
         return (Number) values.get(pos);
     }
 
+    public int getInt(int pos) throws NullPointerException {
+        return ((Number) values.get(pos)).intValue();
+    }
+
     public Object get(int index) {
         return values.get(index);
     }
@@ -46,5 +51,9 @@ public final class JsArray {
 
     @Override public String toString() {
         return values.toString();
+    }
+
+    @Override public Iterator<Object> iterator() {
+        return values.iterator();
     }
 }

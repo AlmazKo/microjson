@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,6 +30,7 @@ class JsonTest {
         // todo: unsupported escaped characters
         // assertEquals("Hot " + '\u2615', js.getString("str_utf_escaped"));
         assertEquals(-12345, js.getNumber("negative_number"));
+        assertEquals(-12345, js.getInt("negative_number"));
         assertEquals(1e-12, js.getNumber("number"));
         assertEquals(1, js.getNumber("number1"));
         assertEquals(123456789012345L, js.getNumber("number_long"));
@@ -41,7 +43,12 @@ class JsonTest {
 
         assertEquals(0, js.getArray("nested_array").getArray(0).size());
         assertEquals(0, js.getObject("obj_empty").size());
+    }
 
+    @Test
+    void parseArray() throws IOException {
+        var example = Files.readString(Path.of("src/test/resources/test.json"));
+        var js = Json.parseObject(example);
         var arr = js.getArray("arr_full");
         assertNotNull(arr);
         assertEquals("array", arr.getString(0));
@@ -49,13 +56,15 @@ class JsonTest {
         assertNotNull(arr.getArray(2));
         assertTrue(arr.getBoolean(3));
         assertFalse(arr.getBoolean(4));
+        assertEquals(42, arr.getInt(7));
         assertNull(arr.get(5));
         assertEquals(0.5, arr.getNumber(6));
+        assertEquals(8, StreamSupport.stream(arr.spliterator(), false).count());
     }
 
     //language=JSON
     @Test
-    void parseArray() {
+    void parsePrimitives() {
         assertTrue(Json.parse("[1]") instanceof JsArray);
         assertTrue(Json.parse("{}") instanceof JsObject);
         assertTrue(Json.parse("1") instanceof Number);

@@ -18,7 +18,7 @@
   "negative_number": -12345,
   "nested_array": [[]],
   "obj_empty": {},
-  "arr_full": ["array", {"value": 1}, [], true, false, null, 0.5],
+  "arr_full": ["array", {"value": 1}, [], true, false, null, 0.5, 42],
   "obj": {
     "name": "Value"
   }
