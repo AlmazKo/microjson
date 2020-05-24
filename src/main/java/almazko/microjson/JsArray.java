@@ -45,8 +45,6 @@ public final class JsArray {
     }
 
     @Override public String toString() {
-        if (values.isEmpty()) return "[]";
-
         return values.toString();
     }
 }

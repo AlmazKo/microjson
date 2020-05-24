@@ -4,27 +4,30 @@ JSON tiny library written in modern Java.
 
 ![Build](https://github.com/AlmazKo/microjson/workflows/Build/badge.svg)
 [![codecov](https://codecov.io/gh/AlmazKo/microjson/branch/master/graph/badge.svg)](https://codecov.io/gh/AlmazKo/microjson)
+[ ![Download](https://api.bintray.com/packages/almazko/micro/microjson/images/download.svg) ](https://bintray.com/almazko/micro/microjson/_latestVersion)
 
-### Pros:
+### Abilities:
 - Tiny library(3 small classes only!), ~5KB in a jar
-- Fast JSON parsing, it faster than Jackson more than 25%, [benchmarks](https://github.com/AlmazKo/microjson/blob/master/src/jmh/results.txt)
-- Bundled as Java 9 module without
-- No dependencies, only java.base
-- Support the full JSON specification
-
-### Cons:
-- Do not support data binding
-- Do not validate JSON according spec, optimistic parsing, fail-fast
-- No extensions
+- Parse JSON faster than all exist libraries. See [benchmarks](https://github.com/AlmazKo/microjson/wiki/Compare-performance-of-JSON-parsers)
+- No strict JSON validation, optimistic parsing, fail-fast 
+- Bundled as Java 9 module without dependencies
+- No garbage, allocate only data
+- Dynamically adopt json data to the closest java analogues
+- Required Java 9+
 
 
-
-## Example:
+### Example:
 
 ```java
-var content = Files.readString(Path.of("my.json")
+var content = """
+{ 
+  "name": "Bob",
+  "age": 29,
+  "traits": ["lazy", "optimistic", "developer"] 
+}
+""";
 var user = Json.parseObject(content);
 var name = user.getString("name");
 var age = user.getNumber("age").intValue();
-var tag = user.getArray("tags").getString(0);
+var tag = user.getArray("traits").getString(0);
 ```
