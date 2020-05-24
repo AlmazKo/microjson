@@ -53,8 +53,8 @@ class JsonTest {
         assertEquals(0.5, arr.getNumber(6));
     }
 
+    //language=JSON
     @Test
-        //language=JSON
     void parseArray() {
         assertTrue(Json.parse("[1]") instanceof JsArray);
         assertTrue(Json.parse("{}") instanceof JsObject);
@@ -66,7 +66,7 @@ class JsonTest {
 
     @Test
     void checkSizes() {
-        /*language=JSON */
+        /* language=JSON */
         var js = Json.parseObject("{\"id\":1234,\"friends\": []}");
         assertEquals(js.size(), 2);
         assertEquals(js.getArray("friends").size(), 0);
@@ -84,4 +84,26 @@ class JsonTest {
         var example = Files.readString(Path.of("src/test/resources/test_win.json"));
         assertTrue(Json.parse(example) instanceof JsObject);
     }
+
+    //language=JSON
+    @Test
+    void checkToString() {
+        assertEquals(
+                "{\"id\":1234, \"friends\":[1, {\"key\":12.3}]}",
+                "" + Json.parseObject("{\"id\":1234,\"friends\": [1,{\"key\": 12.3}]}")
+        );
+        assertEquals(
+                "null",
+                "" + Json.parse("null")
+        );
+        assertEquals(
+                "[]",
+                "" + Json.parse("[]")
+        );
+        assertEquals(
+                "{}",
+                "" + Json.parse("{}")
+        );
+    }
+
 }

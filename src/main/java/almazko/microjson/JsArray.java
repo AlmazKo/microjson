@@ -43,4 +43,10 @@ public final class JsArray {
     public int size() {
         return values.size();
     }
+
+    @Override public String toString() {
+        if (values.isEmpty()) return "[]";
+
+        return values.toString();
+    }
 }

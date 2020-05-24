@@ -3,6 +3,7 @@ package almazko.microjson;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public final class JsObject {
     static final JsObject            EMPTY = new JsObject(Collections.emptyMap());
@@ -58,5 +59,15 @@ public final class JsObject {
 
     public int size() {
         return values.size();
+    }
+
+    @Override public String toString() {
+        if (values.isEmpty()) return "{}";
+
+        StringJoiner sj = new StringJoiner(", ", "{", "}");
+        for (Map.Entry<String, Object> e : values.entrySet()) {
+            sj.add("\"" + e.getKey() + "\":" + e.getValue());
+        }
+        return sj.toString();
     }
 }
