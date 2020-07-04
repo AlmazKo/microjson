@@ -55,7 +55,7 @@ public final class Json {
     }
 
     private String parseString() {
-        cursor++;
+        cursor++; // skip double quotes
         int endIdx = src.indexOf('"', cursor);
         String value = src.substring(cursor, endIdx);
         cursor = endIdx;
@@ -91,7 +91,8 @@ public final class Json {
         JsObject obj = null;
         String key = null;
 
-        for (++cursor; ; cursor++) {
+        // skip an opening bracket
+        for (cursor++; ; cursor++) {
             char c = src.charAt(cursor);
             if (c == '"') {
                 key = parseString();
@@ -111,6 +112,7 @@ public final class Json {
      */
     private JsArray parseArray() {
         JsArray array = null;
+        // skip an opening bracket
         for (cursor++; ; cursor++) {
             char c = src.charAt(cursor);
             if (c == ',' || isWhitespace(c)) continue;
