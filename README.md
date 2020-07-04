@@ -8,7 +8,7 @@ JSON tiny library written in modern Java.
 
 ### Abilities:
 - Tiny library(3 small classes only!), ~6KB in a jar
-- Parse JSON faster than all exist libraries. See [benchmarks](https://github.com/AlmazKo/microjson/wiki/Compare-performance-of-JSON-parsers)
+- Parse JSON faster than all exist libraries. See [benchmarks](https://github.com/AlmazKo/microjson/wiki/Performance-of-JSON-parsers)
 - No strict JSON validation, optimistic parsing, fail-fast 
 - Bundled as Java 9 module without dependencies
 - No garbage, allocate only data
