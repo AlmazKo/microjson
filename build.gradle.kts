@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "almazko"
-version = "0.2"
+version = "0.6"
 
 repositories {
     mavenCentral()
@@ -140,7 +140,7 @@ bintray {
     publish = true
     setPublications("microjson")
     pkg.apply {
-        repo = "microjson"
+        repo = "micro"
         name = artifactName
         userOrg = "almazko"
         githubRepo = githubRepo
