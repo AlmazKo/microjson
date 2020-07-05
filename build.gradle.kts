@@ -1,14 +1,11 @@
-import java.util.*
-
 plugins {
     java
     jacoco
     `maven-publish`
-    id("com.jfrog.bintray") version "1.8.5"
 }
 
 group = "almazko"
-version = "0.6"
+version = "0.6.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -84,80 +81,29 @@ val sourcesJar by tasks.creating(Jar::class) {
     from(sourceSets.getByName("main").allSource)
 }
 
-
-val artifactName = project.name
-val artifactGroup = project.group.toString()
-val artifactVersion = project.version.toString()
-val baseUrl = "https://github.com/AlmazKo/microjson"
-val pomUrl = baseUrl
-val pomScmUrl = baseUrl
-val pomIssueUrl = "$baseUrl/issues"
-val pomDesc = baseUrl
-val githubRepo = "AlmazKo/microjson"
-val githubReadme = "README.md"
-val pomLicenseName = "MIT"
-val pomLicenseUrl = "https://opensource.org/licenses/mit-license.php"
-val pomLicenseDist = "repo"
-val pomDeveloperId = "AlmazKo"
-val pomDeveloperName = "Alex Suslov"
-
-
 publishing {
-    publications {
-        create<MavenPublication>("microjson") {
-            groupId = artifactGroup
-            artifactId = artifactName
-            version = artifactVersion
-            from(components["java"])
-            artifact(sourcesJar)
-            pom.withXml {
-                asNode().apply {
-                    appendNode("description", pomDesc)
-                    appendNode("name", rootProject.name)
-                    appendNode("url", pomUrl)
-                    appendNode("licenses").appendNode("license").apply {
-                        appendNode("name", pomLicenseName)
-                        appendNode("url", pomLicenseUrl)
-                        appendNode("distribution", pomLicenseDist)
-                    }
-                    appendNode("developers").appendNode("developer").apply {
-                        appendNode("id", pomDeveloperId)
-                        appendNode("name", pomDeveloperName)
-                    }
-                    appendNode("scm").apply {
-                        appendNode("url", pomScmUrl)
-                    }
-                }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/almazko/microjson")
+            credentials {
+                username = project.findProperty("pub.user")?.toString()
+                password = project.findProperty("pub.token")?.toString()
             }
         }
     }
-}
-
-
-bintray {
-    user = project.findProperty("bintrayUser").toString()
-    key = project.findProperty("bintrayKey").toString()
-    publish = true
-    setPublications("microjson")
-    pkg.apply {
-        repo = "micro"
-        name = artifactName
-        userOrg = "almazko"
-        githubRepo = githubRepo
-        vcsUrl = pomScmUrl
-        description = "JSON tiny library written in modern Java"
-        setLabels("json-parser")
-        setLicenses("MIT")
-        desc = description
-        websiteUrl = pomUrl
-        issueTrackerUrl = pomIssueUrl
-        githubReleaseNotesFile = githubReadme
-
-        version.apply {
-            name = artifactVersion
-            desc = pomDesc
-            released = Date().toString()
-            vcsTag = artifactVersion
+    publications {
+        create<MavenPublication>("microjson") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+            from(components["java"])
+            pom.withXml {
+                asNode().apply {
+                    appendNode("name", artifactId)
+                    appendNode("url", "https://github.com/AlmazKo/microjson")
+                }
+            }
         }
     }
 }

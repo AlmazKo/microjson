@@ -22,3 +22,6 @@ jobs:
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: true
+
+    - name: Publish
+      run: ./gradlew publish -Ppub.user="${{secrets.GH_USERNAME}}" -Ppub.token="${{secrets.GH_TOKEN}}"
