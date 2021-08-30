@@ -1,11 +1,12 @@
 plugins {
     java
+    `java-library`
     jacoco
     `maven-publish`
 }
 
 group = "almazko"
-version = "0.6.2-SNAPSHOT"
+version = "0.6.3-SNAPSHOT"
 
 repositories {
     mavenCentral()
