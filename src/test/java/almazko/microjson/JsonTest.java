@@ -110,6 +110,15 @@ class JsonTest {
                 "" + Json.parse("[]")
         );
         assertEquals(
+                "[\"abc\"]",
+                "" + Json.parse("[\"abc\"]")
+        );
+
+        assertEquals(
+                "{\"key\":\"ABC\"}",
+                "" + Json.parse("{\"key\":\"ABC\"}")
+        );
+        assertEquals(
                 "{}",
                 "" + Json.parse("{}")
         );

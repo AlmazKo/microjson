@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringJoiner;
 
 public final class JsArray implements Iterable<Object> {
     static final JsArray      EMPTY = new JsArray(Collections.emptyList());
@@ -50,7 +51,17 @@ public final class JsArray implements Iterable<Object> {
     }
 
     @Override public String toString() {
-        return values.toString();
+        if (values.isEmpty()) return "[]";
+
+        StringJoiner sj = new StringJoiner(", ", "[", "]");
+        for (Object e : values) {
+            if (e instanceof String) {
+                sj.add("\"" + e + "\"");
+            } else {
+                sj.add(e.toString());
+            }
+        }
+        return sj.toString();
     }
 
     @Override public Iterator<Object> iterator() {

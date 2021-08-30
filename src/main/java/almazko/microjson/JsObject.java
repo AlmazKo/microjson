@@ -74,7 +74,11 @@ public final class JsObject {
 
         StringJoiner sj = new StringJoiner(", ", "{", "}");
         for (Map.Entry<String, Object> e : values.entrySet()) {
-            sj.add("\"" + e.getKey() + "\":" + e.getValue());
+            if (e.getValue() instanceof CharSequence) {
+                sj.add("\"" + e.getKey() + "\":\"" + e.getValue() + '"');
+            } else {
+                sj.add("\"" + e.getKey() + "\":" + e.getValue());
+            }
         }
         return sj.toString();
     }
