@@ -19,6 +19,14 @@ public final class JsObject {
 
     /**
      * @param key JSON field
+     * @return Object or null
+     */
+    public Object get(String key) {
+        return values.get(key);
+    }
+
+    /**
+     * @param key JSON field
      * @return Array or {@code null}
      */
     public JsArray getArray(String key) {
