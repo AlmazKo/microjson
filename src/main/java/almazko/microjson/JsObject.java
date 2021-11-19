@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.function.BiConsumer;
 
 public final class JsObject {
     static final JsObject            EMPTY = new JsObject(Collections.emptyMap());
@@ -75,6 +76,10 @@ public final class JsObject {
 
     public int size() {
         return values.size();
+    }
+
+    public void forEach(BiConsumer<String, Object> action) {
+        values.forEach(action);
     }
 
     @Override public String toString() {

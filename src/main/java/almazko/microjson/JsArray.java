@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public final class JsArray implements Iterable<Object> {
     static final JsArray      EMPTY = new JsArray(Collections.emptyList());
@@ -48,6 +50,10 @@ public final class JsArray implements Iterable<Object> {
 
     public int size() {
         return values.size();
+    }
+
+    public void forEach(Consumer<Object> action) {
+        values.forEach(action);
     }
 
     @Override public String toString() {

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -73,6 +74,20 @@ class JsonTest {
         assertNull(Json.parse("null"));
     }
 
+
+    @Test
+    void forEach() {
+        var obj = new StringBuilder();
+        var arr = new StringBuilder();
+        //language=JSON
+        Json.parseObject("{\"id\":1, \"value\":2}").forEach((k, v) -> obj.append(k).append(v));
+        //language=JSON
+        ((JsArray) Json.parse("[1, \"a\"]")).forEach(arr::append);
+
+        assertTrue("id1value2".equals(obj.toString()) || "value2id1".equals(obj.toString()));
+        assertEquals("1a", arr.toString());
+    }
+
     @Test
     void checkSizes() {
         /* language=JSON */
@@ -98,29 +113,29 @@ class JsonTest {
     @Test
     void checkToString() {
         assertEquals(
-                "{\"id\":1234, \"friends\":[1, {\"key\":12.3}]}",
-                "" + Json.parseObject("{\"id\":1234,\"friends\": [1,{\"key\": 12.3}]}")
+            "{\"id\":1234, \"friends\":[1, {\"key\":12.3}]}",
+            "" + Json.parseObject("{\"id\":1234,\"friends\": [1,{\"key\": 12.3}]}")
         );
         assertEquals(
-                "null",
-                "" + Json.parse("null")
+            "null",
+            "" + Json.parse("null")
         );
         assertEquals(
-                "[]",
-                "" + Json.parse("[]")
+            "[]",
+            "" + Json.parse("[]")
         );
         assertEquals(
-                "[\"abc\"]",
-                "" + Json.parse("[\"abc\"]")
+            "[\"abc\"]",
+            "" + Json.parse("[\"abc\"]")
         );
 
         assertEquals(
-                "{\"key\":\"ABC\"}",
-                "" + Json.parse("{\"key\":\"ABC\"}")
+            "{\"key\":\"ABC\"}",
+            "" + Json.parse("{\"key\":\"ABC\"}")
         );
         assertEquals(
-                "{}",
-                "" + Json.parse("{}")
+            "{}",
+            "" + Json.parse("{}")
         );
     }
 
